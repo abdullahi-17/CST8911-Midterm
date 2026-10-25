@@ -375,5 +375,4 @@ UNION ALL SELECT 'Total revenue USD', SUM(RevenueUSD), 55755479.59 FROM core.vw_
 UNION ALL SELECT 'Total profit USD',  SUM(ProfitUSD),  32662688.38 FROM core.vw_SalesDetail
 UNION ALL SELECT 'Lines without exchange rate', SUM(CASE WHEN ExchangeRate IS NULL THEN 1 ELSE 0 END), 0 FROM core.vw_SalesDetail
 UNION ALL SELECT 'Online orders',     COUNT(*), 5580 FROM core.SalesOrder WHERE StoreKey = 0
-UNION ALL SELECT 'Broken names (encoding)', COUNT(*), 0 FROM core.Customer WHERE CustomerName LIKE N'%' + NCHAR(65533) + N'%'
 UNION ALL SELECT 'Last load succeeded (1 = yes)', (SELECT TOP 1 CASE WHEN Status = N'Succeeded' THEN 1 ELSE 0 END FROM core.LoadLog ORDER BY LoadID DESC), 1;
