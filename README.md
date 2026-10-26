@@ -6,6 +6,8 @@
 
 ## Source dataset and Blob Storage
 
+[Source Dataset](https://github.com/DimitriKneur/Global-Electronics-Retailer-Analysis/tree/main/0_Data_Sources)
+
 - We used the Global Electronics Retailer dataset, which contains separate files for customers, products, stores, sales, and exchange rates. We uploaded the five CSV files to a private Blob container. The data dictionary was kept as a reference for understanding the columns and creating the database tables.
 
 ## Connections and access
@@ -32,9 +34,13 @@
 
 - A group member reported that approximately 532 customer names contained broken characters. We changed the Customers source dataset encoding to **ISO-8859-1** so the CSV could be read using the intended character encoding. The corrected customer data needed to be checked after reloading and then passed to the team’s core-table load.
 
+## Error-handling test
+
+- We tested the Products transformation by temporarily adding an intentional error after the delete statement. The transformation failed, the logger recorded the error, and the transaction preserved the existing product records. We removed the test statement before running the pipeline again.
+
 ## Validation
 
-We compared the number of rows copied by Data Factory with the staging table counts and checked the transformed table counts. We also reviewed sample records to confirm that dates, prices, and customer names were loaded correctly.
+- We compared the number of rows copied by Data Factory with the staging table counts and checked the transformed table counts. We also reviewed sample records to confirm that dates, prices, and customer names were loaded correctly.
 
 # PowerBI references and explanations:
 
@@ -69,3 +75,13 @@ We compared the number of rows copied by Data Factory with the staging table cou
 3. [Power BI Model Relationships](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-relationships-understand)
 4. [Power BI Slicers](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-slicers?tabs=powerbi-desktop)
 5. [DAX DIVIDE Function](https://learn.microsoft.com/en-us/dax/divide-function-dax)
+6. [Global Electronics Retailer source repository](https://github.com/DimitriKneur/Global-Electronics-Retailer-Analysis/tree/main/0_Data_Sources)
+7. [Dataset Background](https://mavenanalytics.io/data-playground/global-electronics-retailer)
+8. [Microsoft: Azure Blob Storage connector](https://learn.microsoft.com/en-us/azure/data-factory/connector-azure-blob-storage)
+9. [Microsoft: Azure SQL Database connector](https://learn.microsoft.com/en-us/azure/data-factory/connector-azure-sql-database)
+10. [Microsoft: Delimited text format](https://learn.microsoft.com/en-us/azure/data-factory/format-delimited-text)
+11. [Microsoft: Schema and data type mapping](https://learn.microsoft.com/en-us/azure/data-factory/copy-activity-schema-and-type-mapping)
+12. [Microsoft: Script activity](https://learn.microsoft.com/en-us/azure/data-factory/transform-data-using-script)
+13. [Microsoft: Errors and conditional execution](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-pipeline-failure-and-error-handling)
+14. [Microsoft: TRY...CATCH](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/try-catch-transact-sql)
+15. [Microsoft: SET XACT_ABORT](https://learn.microsoft.com/en-us/sql/t-sql/statements/set-xact-abort-transact-sql)
